@@ -1,7 +1,8 @@
 // Copyright © 2023 Lewis S. Bloch. All rights reserved.
 package com.lewscanon.etude.charisma;
 
-import static java.lang.Character.*;
+import static java.lang.Character.isHighSurrogate;
+import static java.lang.Character.isLowSurrogate;
 
 /** Explorations of Unicode code points. */
 public class Unico {
