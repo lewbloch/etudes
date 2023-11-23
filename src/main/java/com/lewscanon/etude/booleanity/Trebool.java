@@ -23,7 +23,7 @@ public class Trebool implements Comparable<Trebool> {
     public boolean left(boolean value) {
         this.left = value;
         this.state = state();
-        System.out.printf("left " + STATEF, state);
+        System.out.printf("L " + STATEF, state);
         return this.left;
     }
 
@@ -35,7 +35,7 @@ public class Trebool implements Comparable<Trebool> {
     public boolean middle(boolean value) {
         this.middle = value;
         this.state = state();
-        System.out.printf("middle " + STATEF, state);
+        System.out.printf("M " + STATEF, state);
         return this.middle;
     }
 
@@ -47,7 +47,7 @@ public class Trebool implements Comparable<Trebool> {
     public boolean right(boolean value) {
         this.right = value;
         this.state = state();
-        System.out.printf("right " + STATEF, state);
+        System.out.printf("R " + STATEF, state);
         return this.right;
     }
 
@@ -94,6 +94,12 @@ public class Trebool implements Comparable<Trebool> {
     public static void main(String... args) {
         final Trebool trebool = new Trebool();
         if ( trebool.left(true) || trebool.middle(true) && trebool.right(false) ) {
+            System.out.println("expression true");
+        }
+        else {
+            System.out.println("expression false");
+        }
+        if ( trebool.left(true) | trebool.middle(true) && trebool.right(false) ) {
             System.out.println("expression true");
         }
         else {
