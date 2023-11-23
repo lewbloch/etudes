@@ -29,5 +29,7 @@ public class Unico {
      */
     public static void main(String... args) {
         showCodePoints();
+        char value = 17000;
+        System.out.printf("char value = %c%n", value);
     }
 }
