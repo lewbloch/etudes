@@ -53,14 +53,26 @@ public class Trebool implements Comparable<Trebool> {
 
     // fields
 
+    /**
+     * Left field.
+     * @return field value.
+     */
     public boolean isLeft() {
         return left;
     }
 
+    /**
+     * Middle field.
+     * @return field value.
+     */
     public boolean isMiddle() {
         return middle;
     }
 
+    /**
+     * Right field.
+     * @return field value.
+     */
     public boolean isRight() {
         return right;
     }
