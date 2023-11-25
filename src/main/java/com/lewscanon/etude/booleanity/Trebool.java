@@ -77,6 +77,44 @@ public class Trebool implements Comparable<Trebool> {
         return right;
     }
 
+    // operations
+
+    /**
+     * Logical {@code and} mapping {@code (left && middle) -> right}.
+     * @return {@code this}.
+     */
+    public final Trebool and() {
+        right(isLeft() && isMiddle());
+        return this;
+    }
+
+    /**
+     * Logical {@code or} mapping {@code (left || middle) -> right}.
+     * @return {@code this}.
+     */
+    public final Trebool or() {
+        right(isLeft() || isMiddle());
+        return this;
+    }
+
+    /**
+     * Logical {@code not} mapping {@code (right) -> !right}.
+     * @return {@code this}.
+     */
+    public final Trebool not() {
+        right(! isRight());
+        return this;
+    }
+
+    /**
+     * Logical {@code xor} mapping {@code (left ^ middle) -> right}.
+     * @return {@code this}.
+     */
+    public final Trebool xor() {
+        right(isLeft() ^ isMiddle());
+        return this;
+    }
+
     // value aspect
 
     @Override
@@ -111,11 +149,22 @@ public class Trebool implements Comparable<Trebool> {
         else {
             System.out.println("expression false");
         }
+
         if ( trebool.left(true) | trebool.middle(true) && trebool.right(false) ) {
             System.out.println("expression true");
         }
         else {
             System.out.println("expression false");
         }
+
+        if ( trebool.left(true) | trebool.middle(true) & trebool.right(false) ) {
+            System.out.println("expression true");
+        }
+        else {
+            System.out.println("expression false");
+        }
+
+        boolean ttf = trebool.left(true) && trebool.middle(true) || trebool.right(false);
+        System.out.println("T && T || F " + trebool + " -> " + ttf);
     }
 }
