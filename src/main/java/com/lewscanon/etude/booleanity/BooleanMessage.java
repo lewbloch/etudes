@@ -5,12 +5,12 @@ package com.lewscanon.etude.booleanity;
 public class BooleanMessage {
     /**
      * Identify a {@code boolean} and return it.
-     * @param express expression to identify the value.
+     * @param description descriptive text.
      * @param value the value to identify.
      * @return the value.
      */
-    public static boolean setBool(String express, boolean value) {
-        System.out.printf(express + " %b%n", value);
+    public static boolean showBool(String description, boolean value) {
+        System.out.printf("%s %b%n", description, value);
         return value;
     }
 
@@ -21,10 +21,12 @@ public class BooleanMessage {
     @SuppressWarnings("ConstantValue")
     public static void main(String... args) {
         int value = 5;
-        System.out.printf("value > 2 | value < 2 ? %b%n",
-            setBool("value > 2", value > 2) | setBool("value < 2", value < 2));
+        showBool("value > 2 | value < 2 ?",
+            showBool("value > 2", value > 2)
+                    | showBool("value < 2", value < 2));
         System.out.println();
-        System.out.printf("value > 2 || value < 2 ? %b%n",
-            setBool("value > 2", value > 2) || setBool("value < 2", value < 2));
+        showBool("value > 2 || value < 2 ?",
+            showBool("value > 2", value > 2)
+                    || showBool("value < 2", value < 2));
     }
 }
