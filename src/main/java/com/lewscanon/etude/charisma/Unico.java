@@ -24,6 +24,20 @@ public class Unico {
     }
 
     /**
+     * Explore conversions.
+     */
+    public static void chonvert() {
+        short shx = 32_000;
+        char chx = (char) shx;
+
+        char chy = 32_000;
+        short shy = (short) chx;
+
+        System.out.printf("shx = %d, chx = %d, shy = %d, chy = %d%n",
+                shx, (int) chx, shy, (int) chy);
+    }
+
+    /**
      * Demonstrate some aspects of code points.
      * @param args program arguments.
      */
@@ -31,5 +45,7 @@ public class Unico {
         showCodePoints();
         char value = 17000;
         System.out.printf("char value = %c%n", value);
+
+        chonvert();
     }
 }
