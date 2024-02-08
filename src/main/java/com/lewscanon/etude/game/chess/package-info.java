@@ -1,2 +1,2 @@
 /* Copyright 2024 Lewis S. Bloch. All rights reserved. */
-package com.lewscanon.etude.doublen;
+package com.lewscanon.etude.game.chess;
