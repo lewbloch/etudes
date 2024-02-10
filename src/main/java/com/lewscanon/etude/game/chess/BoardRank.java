@@ -106,4 +106,12 @@ public enum BoardRank {
     public final BoardRank down(int squares) {
         return up(-squares);
     }
+
+    /**
+     * Reflect the placement to the viewpoint of the other player.
+     * @return the reflected placement.
+     */
+    public BoardRank reflect() {
+        return values()[values().length - 1 - ordinal()];
+    }
 }

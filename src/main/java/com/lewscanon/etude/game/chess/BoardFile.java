@@ -104,4 +104,12 @@ public enum BoardFile {
     public final BoardFile left(int squares) {
         return right(-squares);
     }
+
+    /**
+     * Reflect the placement to the viewpoint of the other player.
+     * @return the reflected placement.
+     */
+    public BoardFile reflect() {
+        return values()[values().length - 1 - ordinal()];
+    }
 }

@@ -1,16 +1,14 @@
-/*
- * Copyright © 2024, Lewis S. Bloch. All rights reserved.
- */
-
+/* Copyright © 2024, Lewis S. Bloch. All rights reserved. */
 package com.lewscanon.etude.game.chess;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
- * A chess piece.
- * Constants have their own internal static variables. HAH!
+ * Chess piece.
+ * Constants can have static members. HAH!
  */
 @SuppressWarnings("unused")
 public enum Piece {
@@ -43,6 +41,7 @@ public enum Piece {
         public Set<Position> moves(Position currentPosition) {
             final Set<Position> legals = new HashSet<>();
 
+            diagonals(legals, currentPosition);
 
             return Collections.unmodifiableSet(legals);
         }
@@ -50,7 +49,7 @@ public enum Piece {
 
     KNIGHT {
         private static final int KLIMIT = 3;
-        private static final int[] rankSteps = {-2, -1, 1, 2};
+        private static final List<Integer> rankSteps = List.of(-2, -1, 1, 2);
 
         @Override
         public Set<Position> moves(Position currentPosition) {
@@ -61,7 +60,7 @@ public enum Piece {
 
                 if (nextRank != null) {
                     final int fileDiff = KLIMIT - Math.abs(rankStep);
-                    for (int fileStep : new int[] {-fileDiff, fileDiff}) {
+                    for (int fileStep : List.of(-fileDiff, fileDiff)) {
                         final BoardFile nextFile = currentPosition.getFile().right(fileStep);
                         if (nextFile != null) {
                             legals.add(new Position(nextFile, nextRank));
@@ -109,4 +108,52 @@ public enum Piece {
      * @return set of legal end points.
      */
     public abstract Set<Position> moves(Position currentPosition);
+
+    static void diagonals(Set<Position> legals, Position currentPosition) {
+        BoardRank rank = currentPosition.getRank().prev();
+        for (BoardFile file = currentPosition.getFile().prev(); file != null && rank != null;
+             file = file.prev(), rank = rank.prev()) {
+            legals.add(new Position(file, rank));
+        }
+
+        rank = currentPosition.getRank().prev();
+        for (BoardFile file = currentPosition.getFile().next(); file != null && rank != null;
+             file = file.prev(), rank = rank.next()) {
+            legals.add(new Position(file, rank));
+        }
+
+        rank = currentPosition.getRank().next();
+        for (BoardFile file = currentPosition.getFile().prev(); file != null && rank != null;
+             file = file.prev(), rank = rank.next()) {
+            legals.add(new Position(file, rank));
+        }
+
+        rank = currentPosition.getRank().prev();
+        for (BoardFile file = currentPosition.getFile().next(); file != null && rank != null;
+             file = file.prev(), rank = rank.next()) {
+            legals.add(new Position(file, rank));
+        }
+    }
+
+    static void diagonalsByFile(Set<Position> legals, BoardFile currentFile, BoardRank rank) {
+    }
+
+    static void orthogonals(Set<Position> legals, Position currentPosition) {
+        for (BoardRank rank = currentPosition.getRank().prev(); rank != null; rank = rank.prev()) {
+            orthogonalsByFile(legals, currentPosition.getFile(), rank);
+        }
+        for (BoardRank rank = currentPosition.getRank().next();
+             rank != null; rank = currentPosition.getRank().next()) {
+            orthogonalsByFile(legals, currentPosition.getFile(), rank);
+        }
+    }
+
+    static void orthogonalsByFile(Set<Position> legals, BoardFile currentFile, BoardRank rank) {
+        for (BoardFile file = currentFile.prev(); file != null; file = currentFile.prev()) {
+            legals.add(new Position(file, rank));
+        }
+        for (BoardFile file = currentFile.next(); file != null; file = currentFile.next()) {
+            legals.add(new Position(file, rank));
+        }
+    }
 }

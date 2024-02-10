@@ -75,4 +75,8 @@ public class Position {
     public int hashCode() {
         return hash;
     }
+
+    public Position otherPlayer() {
+        return new Position(bfile, brank.reflect());
+    }
 }
