@@ -28,10 +28,10 @@ public class BasicFor {
      */
     public static boolean condition() {
         final double odds = Math.random();
-        final var chance = odds < CONTINUE;
-        System.out.printf(CONDITION, bodyCount, odds, chance);
+        final var yes = odds < CONTINUE;
+        System.out.printf(CONDITION, bodyCount, odds, yes);
 
-        return chance;
+        return yes;
     }
 
     /**
