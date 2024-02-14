@@ -10,7 +10,7 @@ import java.util.Set;
  * Chess piece.
  * Constants can have static members. HAH!
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "MismatchedQueryAndUpdateOfCollection", "Java9CollectionFactory"})
 public enum Piece {
     PAWN {
         @Override
@@ -74,6 +74,7 @@ public enum Piece {
     },
 
     ROOK {
+        @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
         @Override
         public Set<Position> moves(Position currentPosition) {
             final Set<Position> legals = new HashSet<>();
@@ -135,6 +136,7 @@ public enum Piece {
         }
     }
 
+    @SuppressWarnings("unused")
     static void diagonalsByFile(Set<Position> legals, BoardFile currentFile, BoardRank rank) {
     }
 

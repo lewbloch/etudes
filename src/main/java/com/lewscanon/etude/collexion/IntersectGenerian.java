@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TreeSet;
 
+/** Find the common elements shared between two collections. */
 public class IntersectGenerian {
     public static <E> Collection<E> intersect(Collection<E> left, Collection<E> right) {
         final Collection<E> common = new TreeSet<>(left);
@@ -27,29 +28,29 @@ public class IntersectGenerian {
         System.out.printf(" lefch = %s%n rigch = %s%n comch = %s%n%n", lefch, rigch, comch);
 
         List<Foo> leffoo = List.of(
-                new Foo('b', "bar"),
-                new Foo('b', "baz"),
-                new Foo('b', "baz"),
-                new Foo('f', "foo"),
-                new Foo('f', "foo"),
-                new Foo('m', "matazz"),
-                new Foo('m', "matazzz"),
-                new Foo('o', "raz"),
-                new Foo('z', "matazz"),
-                new Foo('z', "oof"),
-                new Foo('z', "raz"),
-                new Foo()
+            new Foo('b', "bar"),
+            new Foo('b', "baz"),
+            new Foo('b', "baz"),
+            new Foo('f', "foo"),
+            new Foo('f', "foo"),
+            new Foo('m', "matazz"),
+            new Foo('m', "matazzz"),
+            new Foo('o', "raz"),
+            new Foo('z', "matazz"),
+            new Foo('z', "oof"),
+            new Foo('z', "raz"),
+            new Foo()
         );
         List<Foo> rigfoo = List.of(
-                new Foo('R', "baR"),
-                new Foo('h', "ooph"),
-                new Foo('m', "matazz"),
-                new Foo('o', "foo"),
-                new Foo('z', "baz"),
-                new Foo('z', "baz"),
-                new Foo('z', "matazzz"),
-                new Foo('z', "oof"),
-                new Foo()
+            new Foo('R', "baR"),
+            new Foo('h', "ooph"),
+            new Foo('m', "matazz"),
+            new Foo('o', "foo"),
+            new Foo('z', "baz"),
+            new Foo('z', "baz"),
+            new Foo('z', "matazzz"),
+            new Foo('z', "oof"),
+            new Foo()
         );
         Collection<Foo> comfoo = intersect(leffoo, rigfoo);
         System.out.printf("leffoo = %s%nrigfoo = %s%ncomfoo = %s%n", leffoo, rigfoo, comfoo);
@@ -57,19 +58,19 @@ public class IntersectGenerian {
 }
 
 class Foo implements Comparable<Foo> {
-    static final String FMT = "{seq: %d, signif: \"%s\"}";
-    final int seq;
+    static final String FMT = "{seq: 0x%04x '%c', signif: \"%s\"}";
+    final char seq;
     final String signif;
     final String repre;
 
-    public Foo(int seq, String signif) {
+    public Foo(char seq, String signif) {
         this.seq = seq;
         this.signif = signif == null ? "" : signif;
-        this.repre = String.format(FMT, seq, signif);
+        this.repre = String.format(FMT, (int) seq, seq, signif);
     }
 
     public Foo() {
-        this(-1, "");
+        this('\u0000', "");
     }
 
     @Override
@@ -80,8 +81,8 @@ class Foo implements Comparable<Foo> {
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Foo other
-                && this.seq == other.seq
-                && this.signif.equals(other.signif);
+            && this.seq == other.seq
+            && this.signif.equals(other.signif);
     }
 
     @Override
@@ -92,7 +93,7 @@ class Foo implements Comparable<Foo> {
     @Override
     public int compareTo(Foo augend) {
         return augend == null ? 1
-                : this.seq != augend.seq ? this.seq - augend.seq
-                        : this.signif.compareTo(augend.signif);
+            : this.seq != augend.seq ? this.seq - augend.seq
+            : this.signif.compareTo(augend.signif);
     }
 }

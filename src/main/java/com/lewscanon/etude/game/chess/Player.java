@@ -8,6 +8,7 @@ public enum Player {
     WHITE(0),
     BLACK(1);
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final int playOrder;
 
     Player(int playOrder) {
