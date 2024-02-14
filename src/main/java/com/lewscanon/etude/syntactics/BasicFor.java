@@ -11,7 +11,7 @@ public class BasicFor {
     static final String UPDATE = "Update :%d%n%n";
     static final String BODY = " Body";
 
-    static final double CONTINUE = 0.8333;
+    static final double CONTINUE = 0.8;
 
     private static int bodyCount = 0;
 
