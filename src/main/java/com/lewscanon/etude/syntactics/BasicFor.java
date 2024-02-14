@@ -6,9 +6,8 @@ package com.lewscanon.etude.syntactics;
  */
 public class BasicFor {
     static final String NOUNCE = "%s%n";
-
     static final String INIT = "Initial";
-    static final String EXPRESSION = "Condition %d: %5.4f continue? %b%n";
+    static final String CONDITION = "Condition %d: %5.4f continue? %b%n";
     static final String UPDATE = "Update :%d%n%n";
     static final String BODY = " Body";
 
@@ -30,7 +29,7 @@ public class BasicFor {
     public static boolean condition() {
         final double odds = Math.random();
         final var chance = odds < CONTINUE;
-        System.out.printf(EXPRESSION, bodyCount, odds, chance);
+        System.out.printf(CONDITION, bodyCount, odds, chance);
 
         return chance;
     }
