@@ -50,7 +50,7 @@ public class BasicFor {
     }
 
     /**
-     * Test.
+     * Test the logic.
      * @param args arguments.
      */
     public static void main(String... args) {
