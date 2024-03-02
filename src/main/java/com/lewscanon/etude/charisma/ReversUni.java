@@ -1,17 +1,14 @@
-/*
- * Copyright © 2024, Lewis S. Bloch. All rights reserved.
- */
-
+/* Copyright © 2024, Lewis S. Bloch. All rights reserved. */
 package com.lewscanon.etude.charisma;
 
 import java.util.List;
 
 public class ReversUni {
     static final List<String> testData = List.of(
-            "kayak",
-            "Kayaking",
-            "Pop🎉 star!",
-            "Clapping \uD83D\uDC4F\uD83C\uDFFD hands\uD83D\uDC4F!"
+        "kayak",
+        "Kayaking",
+        "Pop🎉 star!",
+        "Clapping \uD83D\uDC4F\uD83C\uDFFD hands\uD83D\uDC4F!"
     );
 
     public String reverse(String input) {
