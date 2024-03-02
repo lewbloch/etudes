@@ -1,7 +1,4 @@
-/*
- * Copyright © 2024, Lewis S. Bloch. All rights reserved.
- */
-
+/* Copyright © 2024, Lewis S. Bloch. All rights reserved. */
 package com.lewscanon.etude.booleanity.trivalence;
 
 /** Trivalent (3-valued) logic primitive type. */
@@ -62,10 +59,14 @@ public enum Trivalent {
      * @return the result of this {@code AND} the argument.
      */
      public Trivalent and(Trivalent other) {
-        final int tint = toInt();
-        final int oint = other.toInt();
-        return tint * oint == 0 ? UNKNOWN
-                : tint + oint > 0 ? TRUE : FALSE;
+         @SuppressWarnings("UnnecessaryLocalVariable")
+         final var comb = switch (toInt() + other.toInt()) {
+             case -2, -1 -> FALSE;
+             case 2 -> TRUE;
+             case 1 -> UNKNOWN;
+             default -> toInt() * other.toInt() == 0 ? UNKNOWN : FALSE;
+         };
+         return comb;
     }
 
     /**

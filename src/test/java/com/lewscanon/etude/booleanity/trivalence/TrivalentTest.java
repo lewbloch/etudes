@@ -18,41 +18,36 @@ public class TrivalentTest {
     @Test(dataProvider = "notCases")
     public void testNot(UnOp scenario) {
         final Trivalent observed = scenario.operand.not();
-        final Trivalent expected = scenario.expected;
-        final String debug = String.format(VALID, observed, expected);
-        assertEquals(observed, expected, debug);
+        final String debug = String.format(VALID, observed, scenario.expected);
+        assertEquals(observed, scenario.expected, debug);
     }
 
     @Test(dataProvider = "andCases")
     public void testAnd(BiOp scenario) {
         final Trivalent observed = scenario.trivand.and(scenario.augend);
-        final Trivalent expected = scenario.expected;
-        final String debug = String.format(VALID, observed, expected);
-        assertEquals(observed, expected, debug);
+        final String debug = String.format(VALID, observed, scenario.expected);
+        assertEquals(observed, scenario.expected, debug);
     }
 
    @Test(dataProvider = "eqvCases")
    public void testEqv(BiOp scenario) {
        final Trivalent observed = scenario.trivand.eqv(scenario.augend);
-       final Trivalent expected = scenario.expected;
-       final String debug = String.format(VALID, observed, expected);
-       assertEquals(observed, expected, debug);
+       final String debug = String.format(VALID, observed, scenario.expected);
+       assertEquals(observed, scenario.expected, debug);
     }
 
     @Test(dataProvider = "orrCases")
     public void testOrr(BiOp scenario) {
         final Trivalent observed = scenario.trivand.orr(scenario.augend);
-        final Trivalent expected = scenario.expected;
-        final String debug = String.format(VALID, observed, expected);
-        assertEquals(observed, expected, debug);
+        final String debug = String.format(VALID, observed, scenario.expected);
+        assertEquals(observed, scenario.expected, debug);
     }
 
     @Test(dataProvider = "xorCases")
     public void testXor(BiOp scenario) {
         final Trivalent observed = scenario.trivand.xor(scenario.augend);
-        final Trivalent expected = scenario.expected;
-        final String debug = String.format(VALID, observed, expected);
-        assertEquals(observed, expected, debug);
+        final String debug = String.format(VALID, observed, scenario.expected);
+        assertEquals(observed, scenario.expected, debug);
     }
 
     @DataProvider(name = "notCases")
