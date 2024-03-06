@@ -97,9 +97,9 @@ public class TrivalentTest {
             new BiOp(Trivalent.FALSE, Trivalent.TRUE, Trivalent.TRUE),
             new BiOp(Trivalent.UNKNOWN, Trivalent.FALSE, Trivalent.UNKNOWN),
             new BiOp(Trivalent.UNKNOWN, Trivalent.UNKNOWN, Trivalent.UNKNOWN),
-            new BiOp(Trivalent.UNKNOWN, Trivalent.TRUE, Trivalent.UNKNOWN),
+            new BiOp(Trivalent.UNKNOWN, Trivalent.TRUE, Trivalent.TRUE),
             new BiOp(Trivalent.TRUE, Trivalent.FALSE, Trivalent.TRUE),
-            new BiOp(Trivalent.TRUE, Trivalent.UNKNOWN, Trivalent.UNKNOWN),
+            new BiOp(Trivalent.TRUE, Trivalent.UNKNOWN, Trivalent.TRUE),
             new BiOp(Trivalent.TRUE, Trivalent.TRUE, Trivalent.TRUE))
             .iterator();
     }
