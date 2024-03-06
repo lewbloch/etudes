@@ -9,6 +9,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
+@Test(threadPoolSize = 4)
 public class TrivalentTest {
     static final String VALID = "%s observed, %s expected%n";
 
@@ -62,9 +63,9 @@ public class TrivalentTest {
     public Iterator<BiOp> andProvider() {
         return List.of(
             new BiOp(Trivalent.FALSE, Trivalent.FALSE, Trivalent.FALSE),
-            new BiOp(Trivalent.FALSE, Trivalent.UNKNOWN, Trivalent.UNKNOWN),
+            new BiOp(Trivalent.FALSE, Trivalent.UNKNOWN, Trivalent.FALSE),
             new BiOp(Trivalent.FALSE, Trivalent.TRUE, Trivalent.FALSE),
-            new BiOp(Trivalent.UNKNOWN, Trivalent.FALSE, Trivalent.UNKNOWN),
+            new BiOp(Trivalent.UNKNOWN, Trivalent.FALSE, Trivalent.FALSE),
             new BiOp(Trivalent.UNKNOWN, Trivalent.UNKNOWN, Trivalent.UNKNOWN),
             new BiOp(Trivalent.UNKNOWN, Trivalent.TRUE, Trivalent.UNKNOWN),
             new BiOp(Trivalent.TRUE, Trivalent.FALSE, Trivalent.FALSE),

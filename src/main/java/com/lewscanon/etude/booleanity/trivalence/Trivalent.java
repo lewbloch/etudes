@@ -1,7 +1,36 @@
 /* Copyright © 2024, Lewis S. Bloch. All rights reserved. */
 package com.lewscanon.etude.booleanity.trivalence;
 
-/** Trivalent (3-valued) logic primitive type. */
+/** Trivalent (3-valued) logic.
+ * <br>
+ * Referencing
+ * https://homepage.cs.uiowa.edu/~dwjones/ternary/logic.shtml
+ * Standard Ternary Logic
+ * by Douglas W. Jones
+ * THE UNIVERSITY OF IOWA Department of Computer Science
+ * <br>
+ * Monadic functions [Jones, op cit.]<br>
+ * <code>
+ *
+ *  op | 0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F  G  H  K  M  N  P  R  T  V  X  Z
+ *  ---+--------------------------------------------------------------------------------
+ *   – | –  0  +  –  0  +  –  0  +  –  0  +  –  0  +  –  0  +  –  0  +  –  0  +  –  0  +
+ *   0 | –  –  –  0  0  0  +  +  +  –  –  –  0  0  0  +  +  +  –  –  –  0  0  0  +  +  +
+ *   + | –  –  –  –  –  –  –  –  –  0  0  0  0  0  0  0  0  0  +  +  +  +  +  +  +  +  +
+ *
+ * </code><br>
+ * Only a few implemented here.<br>
+ * <code>
+ *
+ *      NOT INC DEC PES OPT
+ *  op |  5   7   B   K   V
+ *  ---+---------------------
+ *   – |  +   0   +   –   –
+ *   0 |  0   +   –   –   +
+ *   + |  –   –   0   +   +
+ *
+ * </code><br>
+ */
 public enum Trivalent {
     FALSE,
     UNKNOWN,
