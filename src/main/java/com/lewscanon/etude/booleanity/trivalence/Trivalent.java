@@ -2,6 +2,8 @@
 package com.lewscanon.etude.booleanity.trivalence;
 
 /** Trivalent (3-valued) logic.
+ * <br>Three-valued logic implementation with integer tricks for the heavy lifting.
+ * <br>You'll enjoy the algorithms and the optimizations immutability empowers.
  * <br>
  * Referencing
  * <a href="https://homepage.cs.uiowa.edu/~dwjones/ternary/logic.shtml">Standard Ternary Logic</a>
