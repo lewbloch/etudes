@@ -9,7 +9,6 @@ package com.lewscanon.etude.gof.observer;
 public interface Watcher<P> {
     /**
      * Register with an {@link Actor}.
-     *
      * @param actor Whom to register with.
      */
     void register(Actor<P> actor);

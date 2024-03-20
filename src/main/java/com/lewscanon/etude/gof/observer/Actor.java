@@ -14,14 +14,12 @@ public interface Actor<P> {
 
     /**
      * Recognize a {@link Watcher}.
-     *
      * @param watcher watcher to register.
      */
     void recognize(Watcher<P> watcher);
 
     /**
-     * Unecognize a {@link Watcher}.
-     *
+     * Unrecognize a {@link Watcher}.
      * @param watcher watcher to unregister.
      */
     void unrecognize(Watcher<P> watcher);

@@ -6,7 +6,6 @@ import java.util.Objects;
 public record Observant(Actor<String> actor) implements Watcher<String>, AutoCloseable {
     /**
      * Constructor, injecting the {@link Actor}.
-     *
      * @param actor the {@link Actor} to observe, non-{@code null}.
      */
     public Observant(Actor<String> actor) {
