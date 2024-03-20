@@ -11,9 +11,8 @@ public class CloseCall {
         try (final StringReader reader = new StringReader(README)) {
             try {
                 char[] buffer = new char[1024];
-                for (int kount = reader.read(buffer, 0, buffer.length);
-                     kount >= 0;
-                     kount = reader.read(buffer, 0, buffer.length)) {
+                for (int kount;
+                     (kount = reader.read(buffer, 0, buffer.length)) >= 0; ) {
                     System.out.print(new String(buffer, 0, kount));
                 }
             }

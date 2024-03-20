@@ -1,0 +1,5 @@
+reader_rector.txt
+Copyright © 2024, Lewis S. Bloch.
+
+This is a sample file to show how to use various
+Java I/O routines and the try-with-resources idiom.
