@@ -10,13 +10,13 @@ public record Observant(Actor<String> actor) implements Watcher<String>, AutoClo
      */
     public Observant(Actor<String> actor) {
         this.actor = Objects.requireNonNull(actor, "actor must be non-null");
-        register(this.actor);
+        registerWith(this.actor);
     }
 
     @Override
     public void close() {
         assert actor != null;
-        unregister(actor);
+        unregisterWith(actor);
     }
 
     @Override
@@ -27,13 +27,13 @@ public record Observant(Actor<String> actor) implements Watcher<String>, AutoClo
     }
 
     @Override
-    public void register(Actor<String> actor) {
+    public void registerWith(Actor<String> actor) {
         assert actor != null;
         actor.recognize(this);
     }
 
     @Override
-    public void unregister(Actor<String> actor) {
+    public void unregisterWith(Actor<String> actor) {
         assert actor != null;
         actor.unrecognize(this);
     }

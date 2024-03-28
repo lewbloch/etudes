@@ -11,13 +11,13 @@ public interface Watcher<P> {
      * Register with an {@link Actor}.
      * @param actor Whom to register with.
      */
-    void register(Actor<P> actor);
+    void registerWith(Actor<P> actor);
 
     /**
      * Unregister with an {@link Actor}.
      * @param actor Whom to unregister with.
      */
-    void unregister(Actor<P> actor);
+    void unregisterWith(Actor<P> actor);
 
     /**
      * Observe an {@link Actor.Event}.
