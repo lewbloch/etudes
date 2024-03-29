@@ -3,8 +3,8 @@ package com.lewscanon.etude.syntactics.initialize;
 
 public class Uninitially {
     public static void main(String... args) {
-        final String FMT = "%s: %d%n";
-        System.out.printf(FMT, "NeverSeen.value", NeverSeen.value);
+        final String FMT = "%s value: %d%n";
+        System.out.printf(FMT, NeverSeen.class, NeverSeen.value);
     }
 }
 
