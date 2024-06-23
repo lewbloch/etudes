@@ -22,9 +22,7 @@ public class L10nator {
 
         final String SHOWIT = "Time per %s: %s\n";
 
-        //        System.out.printf(defaultLocale, "Show this string \"%s\"\n", "¶«»");
         final ZonedDateTime rightNow = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
-
         System.out.printf(defloc, SHOWIT, defloc.getDisplayName(), rightNow.format(defaultFormatter));
         System.out.printf(french, SHOWIT, french.getDisplayName(), rightNow.format(frenchFormatter));
         System.out.printf(us, SHOWIT, us.getDisplayName(), rightNow.format(usFormatter));
