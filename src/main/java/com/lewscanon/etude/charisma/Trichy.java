@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Trichy {
     public static void main(String... args) {
-        final List<String> testData = List.of("ЗO", "OЗ");
+        final List<String> testData = List.of("З0", "0З");
         for (String numeral : testData) {
             try {
                 final int parsed = Integer.parseInt(numeral);
