@@ -3,6 +3,7 @@
  */
 package com.lewscanon.etude.functionary;
 
+@SuppressWarnings("unused")
 @FunctionalInterface
 public interface GotEqval {
     int sum(int var1, int var2);
