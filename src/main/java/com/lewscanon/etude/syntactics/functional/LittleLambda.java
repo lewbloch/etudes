@@ -8,6 +8,11 @@ public class LittleLambda {
         boolean evaluate(int expression, int other);
     }
 
+    @FunctionalInterface
+    interface IntArrowgate {
+        int xform(int expression);
+    }
+
     public static void main(String... args) {
         Lambish validator = (x, y) -> (x > y);
         Lambish valuer = (x, y) -> (x != y);
@@ -21,5 +26,9 @@ public class LittleLambda {
                 47, 47, valuer.evaluate(47, 47));
         System.out.printf("evaluate(%d, %d) -> %b%n",
                 30, 47, valuer.evaluate(30, 47));
+
+        IntArrowgate arrogator = (int lead) -> lead * lead;
+        System.out.printf("xform %d -> %d\n", 4, arrogator.xform(4));
+
     }
 }

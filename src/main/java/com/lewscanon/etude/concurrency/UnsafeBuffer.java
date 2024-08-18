@@ -2,6 +2,7 @@
 package com.lewscanon.etude.concurrency;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,7 +74,7 @@ public record UnsafeBuffer(String input) {
    * @param args arguments.
    */
   public static void main(String... args) {
-    for (var data : testData) {
+    for (var data : args.length == 0? testData : Arrays.asList(args)) {
       for (int trial = 0; trial < NUMTRIALS; ++trial) {
         final UnsafeBuffer unsafeBuffer = new UnsafeBuffer(data);
         System.out.printf(FMT, unsafeBuffer.input(), unsafeBuffer.reassemble());
