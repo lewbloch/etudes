@@ -1,7 +1,10 @@
 /* Copyright © 2024, Lewis S. Bloch. All rights reserved. */
 package com.lewscanon.etude.syntactics.initialize;
 
-/** Refer to a loaded class that never initializes. */
+/**
+ * So you think Java static initializers run before main, or even ever?
+ * Run this code and see what you think.
+ */
 public class Uninitialer {
     static final String INITING = "%s initializing\n";
     static {
@@ -9,7 +12,6 @@ public class Uninitialer {
     }
     public static void main(String... args) {
         System.out.printf("%s main() running\n", Uninitialer.class.getSimpleName());
-
         System.out.printf("%s value: %d\n", NeverInitialed.class.getSimpleName(), NeverInitialed.value);
     }
 }
