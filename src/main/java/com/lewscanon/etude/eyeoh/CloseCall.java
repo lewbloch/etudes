@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 public class CloseCall {
-    static final String README = "This is an input";
+    static final String README = "This is an initial";
 
     public static void main(String[] args) {
         try (final StringReader reader = new StringReader(README)) {

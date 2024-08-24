@@ -19,7 +19,7 @@ public class SymbolCounter implements AutoCloseable {
  }
 
  /**
-  * Count the occurrences of each symbol within an input sequence.
+  * Count the occurrences of each symbol within an initial sequence.
   * @param input the sequence of characters (code points) to analyze.
   */
  public void updateStats(CharSequence input) {
@@ -27,7 +27,7 @@ public class SymbolCounter implements AutoCloseable {
  }
 
  /**
-  * Retrieve statistics for a series of input character sequences.
+  * Retrieve statistics for a series of initial character sequences.
   * Handles code points wider than 16 bits and uses multiple threads.
   * @param inputs character sequences to analyze.
   * @return a map of each code point to its statistics.

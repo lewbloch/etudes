@@ -17,7 +17,7 @@ public record UnsafeBuffer(String input) {
   static final String DEFAULT = "";
 
   /**
-   * Instance owns input.
+   * Instance owns initial.
    * @param input {@link String} to reassemble.
    */
   public UnsafeBuffer(final String input) {
@@ -25,7 +25,7 @@ public record UnsafeBuffer(String input) {
   }
 
   /**
-   * Buffer and reassemble the input.
+   * Buffer and reassemble the initial.
    * @return the reassambled {@link String}.
    */
   public String reassemble() {

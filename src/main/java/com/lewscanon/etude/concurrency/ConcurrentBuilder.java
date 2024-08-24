@@ -1,19 +1,14 @@
 /* Copyright © 2024, Lewis S. Bloch. All rights reserved. */
 package com.lewscanon.etude.concurrency;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static java.util.Objects.requireNonNull;
 
-/**
- *
- */
-public record ConcurrentBuilder(String input) {
-    static final String FMT = "%s\n%s\n\n";
+/* Show the non-concurrent-friendliness of chained methods. */
+public record ConcurrentBuilder(String initial) {
+    static final String FMT = "%s\n";
     static final String INJECTED = " ";
     static final int NUMTRIALS = 6;
 
@@ -21,26 +16,29 @@ public record ConcurrentBuilder(String input) {
         "Now it is a time for all good humans to come to the aid of some other humans."
     );
 
-
     /**
-     * Instance owns input.
-     * @param input {@link String} to reassemble.
+     * Canonical constructor.
+     * @param initial {@link String} to reassemble.
      */
-    public ConcurrentBuilder(final String input) {
-        this.input = Optional.of(input).orElse("");
+    public ConcurrentBuilder(final String initial) {
+        this.initial = Optional.of(initial).orElse("");
     }
 
     /**
-     * Buffer and reassemble the input.
-     *
-     * @return the reassambled {@link String}.
+     * Reassemble the initial value into a provided buffer.
+     * This will show the effect of different implementations.
+     * @param buffer the buffer into which to reassemble the value.
+     * @return the reassembled value.
      */
     public String reassemble(final List<String> buffer) {
-        assert input != null;
+        assert initial != null;
         requireNonNull(buffer, "null buffer").clear();
 
         final List<Thread> pool = new ArrayList<>();
-        for (var piece : input.split(INJECTED)) {
+
+        // Each thread receives one of the pieces to reassemble
+        // Even if {@code buffer.add} is synchronized there could be trouble.
+        for (final var piece : initial.split(INJECTED)) {
             pool.add(new Thread(() -> {
                 buffer.add(piece);
                 buffer.add(INJECTED);
@@ -48,42 +46,31 @@ public record ConcurrentBuilder(String input) {
         }
 
         for (var thread : pool) {
-            thread.start();
+            thread.start();     // add one piece to the reassembled target
         }
         for (var thread : pool) {
             try {
                 thread.join();
             }
             catch (InterruptedException exc) {
-                Thread.currentThread().interrupt();
+                Thread.currentThread().interrupt(); // keep going
             }
         }
 
         final StringBuilder assembler = new StringBuilder();
-        buffer.forEach(assembler::append);
+        buffer.forEach(assembler::append);  // add buffer items to assembler in the order the threads buffered them
         return assembler.toString();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (obj == null || obj.getClass() != this.getClass()) {
-            return false;
-        }
-        var that = (ConcurrentBuilder) obj;
-        return Objects.equals(this.input, that.input);
-    }
+    static void tryout(final List<String> buffer) {
+        for (var data : testData) {
+            final ConcurrentBuilder builder = new ConcurrentBuilder(data);
+            System.out.printf(FMT, builder);
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(input);
-    }
-
-    @Override
-    public String toString() {
-        return "ConcurrentBuilder(" + input + ')';
+            for (int trial = 0; trial < NUMTRIALS; ++trial) {
+                System.out.printf(FMT, builder.reassemble(buffer));
+            }
+        }
     }
 
     /**
@@ -91,12 +78,12 @@ public record ConcurrentBuilder(String input) {
      * @param args arguments.
      */
     public static void main(String... args) {
-        for (var data : testData) {
-            for (int trial = 0; trial < NUMTRIALS; ++trial) {
-                final ConcurrentBuilder builder = new ConcurrentBuilder(data);
-                System.out.printf(FMT, builder.input(),
-                        builder.reassemble(new CopyOnWriteArrayList<>()));
-            }
-        }
+        final String TRYF = "\n%s\n";
+
+        System.out.printf(TRYF, "CopyOnWriteArrayList");
+        tryout(new CopyOnWriteArrayList<>());
+
+        System.out.printf(TRYF, "Collections.synchronizedList");
+        tryout(Collections.synchronizedList(new ArrayList<>()));
     }
 }
