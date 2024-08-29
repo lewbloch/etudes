@@ -1,34 +1,35 @@
-/*
- */
+/* Copyright © 2024, Lewis S. Bloch. All rights reserved. */
 package com.lewscanon.etude.eyeoh;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static java.nio.file.Files.createDirectory;
+import static java.nio.file.Files.createFile;
+import static java.nio.file.Files.delete;
+import static java.nio.file.Files.exists;
+import static java.nio.file.Files.isDirectory;
+
 public class NighoDirector {
-    static void checkDirectory() {
+    static void exemplifyNio() {
         final String FNAME = "file.txt";
-        final String EXISTS = "%6s:    exists? %b%n";
-        final String ISADIR = "%6s: directory? %b%n";
+        final String EXISTS = "%s %s\n exists? %b\n is dir? %b\n";
 
         try {
             final Path path = Paths.get(FNAME);
-            System.out.printf("Checking %s%n", path.toAbsolutePath());
+            System.out.printf("\n%s\n", path.toAbsolutePath());
 
-            Files.delete(path);
-            System.out.printf(EXISTS, "Before", Files.exists(path));
-            System.out.printf(ISADIR, "", Files.isDirectory(path));
+            delete(path);
+            System.out.printf(EXISTS, "delete", path, exists(path), isDirectory(path));
 
-            Files.createDirectory(path);
-            System.out.printf(EXISTS, "After", Files.exists(path));
-            System.out.printf(ISADIR, "", Files.isDirectory(path));
+            createDirectory(path);
+            System.out.printf(EXISTS, "createDirectory", path, exists(path), isDirectory(path));
 
-            Files.delete(path);
-            Files.createFile(path);
-            System.out.printf(EXISTS, "After", Files.exists(path));
-            System.out.printf(ISADIR, "", Files.isDirectory(path));
+            delete(path);
+            System.out.printf(EXISTS, "delete", path, exists(path), isDirectory(path));
+            createFile(path);
+            System.out.printf(EXISTS, "createFile", path, exists(path), isDirectory(path));
         }
         catch (IOException exc) {
             System.err.printf("pwd: %s%n", exc.getMessage());
@@ -36,6 +37,6 @@ public class NighoDirector {
     }
 
     public static void main(String... args) {
-        checkDirectory();
+        exemplifyNio();
     }
 }
