@@ -5,7 +5,7 @@ import java.util.Optional;
 
 /**
  * Java initializations and invocations sequence weirdly.
- * Why don't some of these routines run, but others do?
+ * Run this code, then figure out why the sequence happens as it does.
  */
 public class Parentalism {
     @SuppressWarnings("AccessStaticViaInstance")
