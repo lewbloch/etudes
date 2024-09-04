@@ -4,7 +4,7 @@ package com.lewscanon.etude.syntactics;
 import java.util.Optional;
 
 /**
- * Java's shown initialization happens weirdly.
+ * Java initializations and invocations sequence weirdly.
  * Why don't some of these routines run, but others do?
  */
 public class Parentalism {
