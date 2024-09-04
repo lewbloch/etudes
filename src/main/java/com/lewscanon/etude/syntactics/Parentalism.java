@@ -5,7 +5,10 @@ import java.util.Optional;
 
 /**
  * Java initializations and invocations sequence weirdly.
+ * <br>
  * Run this code, then figure out why the sequence happens as it does.
+ * <br>
+ * Or try to predict it, then run this code and figure out why you were wrong.
  */
 public class Parentalism {
     @SuppressWarnings("AccessStaticViaInstance")
