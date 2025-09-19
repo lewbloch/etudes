@@ -3,6 +3,10 @@ package com.lewscanon.etude.charisma;
 
 import java.util.List;
 
+/**
+ * Parsing Strings by char fails
+ * because a character can and the majority do occupy two chars.
+ */
 public class ReversUni {
     static final List<String> testData = List.of(
         "kayak",
@@ -52,7 +56,8 @@ public class ReversUni {
     }
 
     String reverseByList(String input) {
-        final Integer[] reversing = input.chars().boxed().toList().reversed().toArray(new Integer[0]);
+        final Integer[] reversing = input.chars().boxed().toList()
+                .reversed().toArray(new Integer[0]);
         final char[] answer = new char[reversing.length];
         for (int ix = 0; ix < answer.length; ++ix) {
             answer[ix] = (char) reversing[ix].intValue();
@@ -61,7 +66,8 @@ public class ReversUni {
     }
 
     String reverseCodePoints(String input) {
-        final Integer[] reversing = input.codePoints().boxed().toList().reversed().toArray(new Integer[0]);
+        final Integer[] reversing = input.codePoints().boxed().toList()
+                .reversed().toArray(new Integer[0]);
         final int[] answer = new int[reversing.length];
         for (int ix = 0; ix < answer.length; ++ix) {
             answer[ix] = reversing[ix];
@@ -82,7 +88,7 @@ public class ReversUni {
                 reverser.naiveReverse(datum),
                 reverser.codePointReverse(datum),
                 reverser.reverse(datum)
-                    );
+            );
         }
     }
 }
