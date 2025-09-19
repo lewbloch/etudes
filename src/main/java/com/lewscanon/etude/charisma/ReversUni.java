@@ -71,7 +71,8 @@ public class ReversUni {
 
     public static void main(String... args) {
         final String FORMAT =
-"\"%s\"%n\"%s\" very naive reverse%n\"%s\" naive reverse%n\"%s\" code point reverse%n\"%s\" smart reverse%n%n";
+            "\"%s\"%n\"%s\" very naive reverse%n\"%s\" naive reverse%n"
+                + "\"%s\" code point reverse%n\"%s\" smart reverse%n%n";
 
         final ReversUni reverser = new ReversUni();
         for (String datum : testData) {
