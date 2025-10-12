@@ -16,11 +16,8 @@ public class Factoryal {
             return BigInteger.ONE;
         }
 
-        // possible idempotent recalculation
-        if (memoriam.get(enn) == null) {
-            memoriam.putIfAbsent(enn,
+        memoriam.putIfAbsent(enn,
                 BigInteger.valueOf(enn).multiply(factorial(enn - 1)));
-        }
 
         return memoriam.get(enn);
     }
