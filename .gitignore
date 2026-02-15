@@ -72,3 +72,4 @@ output/
 *.war
 *.zip
 *.~
+/src/main/java/com/lewscanon/etude/scratch/
