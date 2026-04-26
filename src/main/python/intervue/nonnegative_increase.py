@@ -19,7 +19,7 @@ def nonnegative_increase(values):
     increase = 0
     minim = values[0]
 
-    for pos in range(0, len(values)):
+    for pos in range(1, len(values)):
         if values[pos] < 0:
             return -1
         minim = min(values[pos], minim)
