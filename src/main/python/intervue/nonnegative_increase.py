@@ -10,6 +10,7 @@
 # [16, 10, 9, 7, 7, 6, 1, 1, 1] => 0
 # [16, 10, 9, 7, 6, 1] => 0
 # [16, 7, 6, 1, -3, 10, 1, 7, 9] => -1
+# [-3, 10, 1, 7, 9] => -1
 #
 # Copyright © 2026 Lewis S. Bloch.
 
@@ -19,7 +20,7 @@ def nonnegative_increase(values):
     increase = 0
     minim = values[0]
 
-    for pos in range(1, len(values)):
+    for pos in range(0, len(values)):
         if values[pos] < 0:
             return -1
         minim = min(values[pos], minim)
@@ -35,6 +36,7 @@ examples = (
     [16, 10, 9, 7, 7, 6, 1, 1, 1],
     [16, 10, 9, 7, 6, 1],
     [16, 7, 6, 1, -3, 10, 1, 7, 9],
+    [-3, 10, 1, 7, 9],
 )
 
 for vals in examples:
