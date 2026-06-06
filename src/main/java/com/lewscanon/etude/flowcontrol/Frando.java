@@ -3,28 +3,37 @@ package com.lewscanon.etude.flowcontrol;
 import java.util.Date;
 import java.util.Random;
 
+import static java.lang.Thread.currentThread;
+import static java.lang.Thread.sleep;
+
 public class Frando {
-    static final double STOP_ODDS = 0.057;
-    static final Random randy = new Random(new Date().getTime());
+    static final String BEGIN = "Begin";
+    static final String INTERRUPTED = "\nInterrupted";
+    static final String STOPPED = "\n%d iterations\n";
+    static final long INTERV = 301L;
+    static final int NLOOPS = 7;
+
+    static final double ODDS = 0.061;
+    static final Random RANDY = new Random(new Date().getTime());
 
     static boolean keepGoing() {
-        return randy.nextDouble() >= STOP_ODDS;
+        return RANDY.nextDouble() >= ODDS;
     }
 
     public static void main(String... args) {
-        final int NLOOPS = 11;
-        final String BEGIN = "Begin";
-        final String STOPPING = "\n%d iterations\n";
-
         System.out.println(BEGIN);
         for (int loops = 0; loops < NLOOPS; ++loops) {
             int kount = 0;
-            for (boolean going = keepGoing();
-                 going;
-                 ++kount, going = keepGoing()) {
-                System.out.print('.');
+            try {
+                for (char sep = '.'; keepGoing(); sleep(INTERV), ++kount) {
+                    System.out.print(sep);
+                }
             }
-            System.out.printf(STOPPING, kount);
+            catch (InterruptedException exc) {
+                System.err.println(INTERRUPTED);
+                currentThread().interrupt();
+            }
+            System.out.printf(STOPPED, kount);
         }
     }
 }
