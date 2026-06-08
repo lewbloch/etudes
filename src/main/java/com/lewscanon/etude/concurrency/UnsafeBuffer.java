@@ -61,11 +61,6 @@ public record UnsafeBuffer(String input) {
     return unsafe.toString();
   }
 
-  @Override
-  public String input() {
-    return input;
-  }
-
   static final List<String> testData = List.of(
 "Now it is a time for all good humans to come to the aid of some other humans."
   );
