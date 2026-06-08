@@ -11,10 +11,10 @@ import java.util.Optional;
  * @param input {@link StringBuffer} won't save you.
  */
 public record UnsafeBuffer(String input) {
-  static final String FMT = "%s\n%s\n\n";
-  static final String INJECTED = " ";
-  static final int NUMTRIALS = 12;
+  static final String BLANK = " ";
   static final String DEFAULT = "";
+  static final String FMT = "%s\n%s\n\n";
+  static final int NUMTRIALS = 5;
 
   /**
    * Instance owns initial.
@@ -34,16 +34,17 @@ public record UnsafeBuffer(String input) {
       return DEFAULT;
     }
 
-    final List<String> pieces = List.of(input.split(INJECTED));
-    if (pieces.isEmpty()) {
-      return DEFAULT;
+    final List<String> pieces = new ArrayList<>();
+    for (var splat : List.of(input.split(BLANK))) {
+      pieces.add(splat);
+      pieces.add(BLANK);
     }
 
     final StringBuffer unsafe = new StringBuffer();
 
     final List<Thread> pool = new ArrayList<>(pieces.size());
     for (var piece : pieces) {
-      pool.add(new Thread(() -> unsafe.append(piece).append(INJECTED)));
+      pool.add(new Thread(() -> unsafe.append(piece)));
     }
 
     for (var thread : pool) {
