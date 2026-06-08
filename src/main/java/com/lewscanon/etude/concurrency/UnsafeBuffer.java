@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static java.lang.Thread.currentThread;
+
 /**
  * Proof that {@link StringBuffer} is not thread safe.
  * @param input {@link StringBuffer} won't save you.
@@ -13,7 +15,6 @@ import java.util.Optional;
 public record UnsafeBuffer(String input) {
   static final String BLANK = " ";
   static final String DEFAULT = "";
-  static final String FMT = "%s\n%s\n\n";
   static final int NUMTRIALS = 5;
 
   /**
@@ -55,7 +56,7 @@ public record UnsafeBuffer(String input) {
         thread.join();
       }
       catch (InterruptedException exc) {
-        Thread.currentThread().interrupt();
+        currentThread().interrupt();
       }
     }
     return unsafe.toString();
@@ -71,9 +72,10 @@ public record UnsafeBuffer(String input) {
    */
   public static void main(String... args) {
     for (var data : args.length == 0? testData : Arrays.asList(args)) {
+      System.out.println(data);
       for (int trial = 0; trial < NUMTRIALS; ++trial) {
         final UnsafeBuffer unsafeBuffer = new UnsafeBuffer(data);
-        System.out.printf(FMT, unsafeBuffer.input(), unsafeBuffer.reassemble());
+        System.out.println(unsafeBuffer.reassemble());
       }
     }
   }
