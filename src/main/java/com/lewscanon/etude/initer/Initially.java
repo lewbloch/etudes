@@ -1,4 +1,4 @@
-package com.lewscanon.etude;
+package com.lewscanon.etude.initer;
 
 public class Initially {
  private static final String FMT = "\"%s\": {\"ini\": %d, \"ins\": \"%s\"}";
