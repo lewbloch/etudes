@@ -6,15 +6,15 @@ public class Privy extends AbstractPrivy{
     }
 
     @Override
-    public boolean login(long token) {
-        System.out.println("Logging in name with token: " + token);
+    public boolean login() {
+        System.out.println("Set up login method");
         return true;
     }
 
     public static void main(String[] args) {
         Privy privy = new Privy("Jo Jones");
-        long token = privy.getToken();
-        boolean success = privy.login(token);
+        String name = privy.getName();
+        boolean success = privy.login(name);
         System.out.println("Login succeeded? " + success);
     }
 }
