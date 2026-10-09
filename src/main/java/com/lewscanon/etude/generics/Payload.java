@@ -14,7 +14,7 @@ import static java.lang.String.format;
 public class Payload<P extends Scraper<P>>  {
     private static final String ERRF = "%s: %s%n";
 
-    private final Class<P> ptype;
+    private final Class<? extends P> ptype;
 
     private P payload;
 
@@ -22,9 +22,10 @@ public class Payload<P extends Scraper<P>>  {
      * Constructor that establishes the base type with a runtime type token of type {@link Class<P>}.
      *
      */
-    public Payload(Class<P> ptype) {
+    public Payload(Class<? extends P> ptype) {
         if (ptype == null) {
-            throw new NullPointerException(format(ERRF, "Null type token", "Provide a type token"));
+            throw new NullPointerException(
+                    format(ERRF, "Null type token", "Provide a type token"));
         }
         this.ptype = ptype;
     }
@@ -34,7 +35,7 @@ public class Payload<P extends Scraper<P>>  {
      * @return the payload.
      */
     public P getPayload() {
-        return payload;
+        return copy(payload);
     }
 
     /**
@@ -50,7 +51,7 @@ public class Payload<P extends Scraper<P>>  {
 
         final String EXCF = "%s: %s%n payload {%s}%n";
         try {
-            P copied = ptype.getDeclaredConstructor().newInstance();
+            P copied = ptype.getConstructor().newInstance();
             copied.scrape(payload);
             return copied;
         }
@@ -63,17 +64,4 @@ public class Payload<P extends Scraper<P>>  {
                 exc);
         }
     }
-}
-
-/**
- * "Scrape" the contents from a source object into this as a copy.
- * Adapt types to copy their contents or values into a custom type.
- * @param <T> the type to scrape from.
- */
-interface Scraper<T> {
-    /**
-     * Scrape the contents of the argument into oneself.
-     * @param from the object to scrape.
-     */
-    void scrape(T from);
 }
