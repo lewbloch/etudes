@@ -1,7 +1,7 @@
 /* Copyright © 2026 Lewis S. Bloch */
 package com.lewscanon.etude.patternz;
 
-import java.time.LocalTime;
+import static java.time.LocalTime.now;
 
 public class LazyInit {
     static final String TFORM = " %s [%s]\t%s\n";
@@ -18,43 +18,46 @@ public class LazyInit {
         String myClazz = LazyInit.class.getSimpleName();
 
         String jfName = JustFinal.class.getSimpleName();
-        System.out.printf(LazyInit.TFORM, myClazz, LocalTime.now(),
+        System.out.printf(LazyInit.TFORM, myClazz, now(),
                 jfName + " referenced");
         safeSleep(500);
 
+        System.out.printf(LazyInit.TFORM, myClazz, now(),
+             jfName + ".getInstance");
         JustFinal justFinal = JustFinal.getInstance();
         safeSleep(500);
-        System.out.printf(TFORM, myClazz, LocalTime.now(),
+        System.out.printf(TFORM, myClazz, now(),
                 "JustFinal instance " + justFinal);
 
         safeSleep(1000);
         System.out.println();
 
         String elName = ExtraLazy.class.getSimpleName();
-        System.out.printf(TFORM, myClazz, LocalTime.now(),
+        System.out.printf(TFORM, myClazz, now(),
                 elName + " referenced");
         safeSleep(500);
 
+        System.out.printf(LazyInit.TFORM, myClazz, now(),
+                elName + ".getInstance");
         ExtraLazy extraLazy = ExtraLazy.getInstance();
         safeSleep(500);
-        System.out.printf(TFORM, myClazz, LocalTime.now(),
+        System.out.printf(TFORM, myClazz, now(),
                 "ExtraLazy instance " + extraLazy);
     }
 }
 
 class JustFinal {
-    static
-    {
+    static {
         System.out.printf(LazyInit.TFORM, JustFinal.class.getSimpleName(),
-                LocalTime.now(), "static initialization");
+                now(), "static initialization");
         LazyInit.safeSleep(500);
     }
 
     private static final JustFinal JFIN = new JustFinal();
-    static
-    {
+
+    static {
         System.out.printf(LazyInit.TFORM, JustFinal.class.getSimpleName(),
-                LocalTime.now(), ": JFIN = " + JFIN);
+                now(), ": JFIN = " + JFIN);
         LazyInit.safeSleep(500);
     }
 
@@ -64,34 +67,34 @@ class JustFinal {
 
     private JustFinal() {
         System.out.printf(LazyInit.TFORM, JustFinal.class.getSimpleName(),
-                LocalTime.now(), ": constructor");
+                now(), ": constructor");
         LazyInit.safeSleep(500);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "JFIN " + JFIN.hashCode();
     }
 }
 
 class ExtraLazy {
-    static
-    {
+    static {
         System.out.printf(LazyInit.TFORM, ExtraLazy.class.getSimpleName(),
-                LocalTime.now(), "static initialization");
+                now(), "static initialization");
         LazyInit.safeSleep(500);
     }
 
     private static volatile ExtraLazy LAZY;
-    static
-    {
+
+    static {
         System.out.printf(LazyInit.TFORM, ExtraLazy.class.getSimpleName(),
-                LocalTime.now(), ": LAZY = " + LAZY);
+                now(), ": LAZY = " + LAZY);
         LazyInit.safeSleep(500);
     }
 
-    /** Double-checked locking. */
+    /**
+     * Double-checked locking.
+     */
     public static ExtraLazy getInstance() {
         if (LAZY == null) {
             synchronized (ExtraLazy.class) {
@@ -105,13 +108,12 @@ class ExtraLazy {
 
     private ExtraLazy() {
         System.out.printf(LazyInit.TFORM, ExtraLazy.class.getSimpleName(),
-                LocalTime.now(), ": constructor");
+                now(), ": constructor");
         LazyInit.safeSleep(500);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "LAZY " + LAZY.hashCode();
     }
 }
