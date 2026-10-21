@@ -2,14 +2,14 @@
 package com.lewscanon.etude.charisma;
 
 public class CharBites {
-    static final String QUIZF = "\n\"%s\" test: %b\n";
+    static final String QUIZF = "\"%s\" test: %b\n";
 
     public static void main(String... args) {
         final String clefer = "𝄞CDA";
         System.out.printf(QUIZF, clefer, (clefer.getBytes().length & 1) == 0);
-//        hint(clefer);
-//        hint("BCDA");
-//        hint("𝄞C♫♪");
+        hint(clefer);
+        hint("BCDA");
+        hint("𝄞C♫♪");
     }
 
     static void hint(final String clefer) {
