@@ -27,7 +27,10 @@ class Parent {
     }
 
     String name;
-    String getName() { return name; }
+
+    String getName() {
+        return name;
+    }
 }
 
 class Child extends Parent {
@@ -59,11 +62,16 @@ class Child extends Parent {
     }
 
     String childName;
-    @Override String getName() { return String.format(FMT, super.getName(), childName); }
+
+    @Override
+    String getName() {
+        return String.format(FMT, super.getName(), childName);
+    }
 }
 
 public class Initializzy {
     static final String FMT = "%s name = %s\n";
+    static final String FMT_CLAZ = "%s class referenced\n";
 
     static void reveal(Parent instance) {
         System.out.printf(FMT, instance.getClass().getSimpleName(), instance.getName());
@@ -78,23 +86,26 @@ public class Initializzy {
     }
 
     public static void main(String... args) {
-        if (args.length == 0) {
-            testChildInstance();
+        System.out.printf(FMT_CLAZ, Child.class.getSimpleName());
+        System.out.println("No initialization performed yet");
+        if (args.length > 0) {
+            switch (args[0]) {
+                case "ParentAnnounce":
+                    Parent.announce();
+                    return;
+                case "ChildAnnounce":
+                    Child.announce();
+                    return;
+                case "parent":
+                    testParentInstance();
+                    return;
+                case "child":
+                    testChildInstance();
+                    return;
+                default:
+                    break;
+            }
         }
-        else switch (args[0]) {
-            case "ParentAnnounce":
-                Parent.announce();
-                break;
-            case "ChildAnnounce":
-                Child.announce();
-                break;
-            case "parent":
-                testParentInstance();
-                break;
-            case "child":
-            default:
-                testChildInstance();
-                break;
-        }
+        System.out.println("No initialization performed at all");
     }
 }
